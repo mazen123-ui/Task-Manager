@@ -3,6 +3,8 @@ let taskContainer = document.querySelector(".task-container");
 let addTaskBtnText = document.querySelector(".add");
 let tabs = document.querySelectorAll(".tab");
 let allTasksSpan = document.querySelector(".num-of-tasks");
+let activeTasksSpan = document.querySelector(".num-of-active-tasks");
+let completedTasksSpan = document.querySelector(".num-of-completed-tasks");
 let modelContainer = document.querySelector(".model-container");
 let closeModelBtn = document.querySelector(".close-model");
 let addTaskModelForm = document.querySelector(".add-task-model form");
@@ -25,6 +27,8 @@ function renderTasks(filter = "all") {
   let tasks = getTasksFromLocalstorage();
   taskContainer.innerHTML = "";
   allTasksSpan.textContent = tasks.length;
+  activeTasksSpan.textContent = tasks.filter((task) => task.checked === false).length;
+  completedTasksSpan.textContent = tasks.filter((task) => task.checked === true).length;
   let updatedTasks = tasks;
   if (filter === "all") {
     updatedTasks = tasks;
