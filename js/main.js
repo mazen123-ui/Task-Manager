@@ -27,8 +27,12 @@ function renderTasks(filter = "all") {
   let tasks = getTasksFromLocalstorage();
   taskContainer.innerHTML = "";
   allTasksSpan.textContent = tasks.length;
-  activeTasksSpan.textContent = tasks.filter((task) => task.checked === false).length;
-  completedTasksSpan.textContent = tasks.filter((task) => task.checked === true).length;
+  activeTasksSpan.textContent = tasks.filter(
+    (task) => task.checked === false
+  ).length;
+  completedTasksSpan.textContent = tasks.filter(
+    (task) => task.checked === true
+  ).length;
   let updatedTasks = tasks;
   if (filter === "all") {
     updatedTasks = tasks;
@@ -56,6 +60,7 @@ function renderTasks(filter = "all") {
         <div class="text">
             <h2 class="task-name">${task.name}</h2>
             <p>${task.description}</p>
+            <p>${task.date}</p>
         </div>
     </div>
     <div class="actions">
@@ -81,9 +86,8 @@ function closeModel() {
 
 addTaskBtn.addEventListener("click", () => {
   modelContainer.style.display = "block";
-  document.querySelector(
-    ".add"
-  ).innerHTML = `<i class="ri-save-3-line"></i> Add Task`;
+  document.querySelector(".add").innerHTML =
+    `<i class="ri-save-3-line"></i> Add Task`;
 });
 closeModelBtn.addEventListener("click", closeModel);
 cancelBtn.addEventListener("click", closeModel);
@@ -93,6 +97,7 @@ addTaskModelForm.addEventListener("submit", (event) => {
   event.preventDefault();
   let taskName = document.querySelector("#task-name").value;
   let taskDescription = document.querySelector("#task-description").value;
+  let date = document.querySelector("#task-date").value;
   if (taskName === "") {
     alert("Task Name Can't Be Empty!!!");
     return;
@@ -104,6 +109,7 @@ addTaskModelForm.addEventListener("submit", (event) => {
         id: Date.now(),
         name: taskName,
         description: taskDescription,
+        date: date,
         checked: false,
       });
       setTasksFromLocalsorage(tasks);
@@ -116,7 +122,7 @@ addTaskModelForm.addEventListener("submit", (event) => {
       let tasks = getTasksFromLocalstorage();
       let updatedTasks = tasks.map((task) => {
         if (task.id === updatedId) {
-          return { ...task, name: taskName, description: taskDescription }; // same object with updated name and description
+          return { ...task, name: taskName, description: taskDescription ,date: date}; // same object with updated name and description
         } else {
           return task;
         }
@@ -148,8 +154,8 @@ function toggleCheckbox(id) {
 // clear all tasks
 clearTabsBtn.addEventListener("click", () => {
   if (confirm("Do You Really Want To Clear All Your Tasks!!!")) {
-    localStorage.removeItem('tasks')
-    renderTasks()
+    localStorage.removeItem("tasks");
+    renderTasks();
   }
 });
 
@@ -179,8 +185,8 @@ function editTask(id) {
   let updatedTask = tasks.find((task) => task.id === id);
   document.querySelector("#task-name").value = updatedTask.name;
   document.querySelector("#task-description").value = updatedTask.description;
+  document.querySelector("#task-date").value = updatedTask.date;
   updatedId = id;
-  document.querySelector(
-    ".add"
-  ).innerHTML = `<i class="ri-save-3-line"></i> Update Task`;
+  document.querySelector(".add").innerHTML =
+    `<i class="ri-save-3-line"></i> Update Task`;
 }

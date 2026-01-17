@@ -304,6 +304,9 @@ main {
   color: var(--text-secondary);
 }
 
+.card .content .text p:last-child {
+  font-size: .8rem;
+}
 /* When task is completed */
 .card.completed {
   background-color: rgba(28, 35, 46, 0.123);
