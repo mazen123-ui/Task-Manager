@@ -19,10 +19,10 @@
   /* Spacing & Effects */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.2),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --card-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover:
+    0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -39,12 +39,13 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   line-height: 1.5;
-  background-image: radial-gradient(
-      at 0% 0%,
+  background-image:
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 40%),
+    radial-gradient(
+      at 100% 100%,
       rgba(59, 130, 246, 0.08) 0px,
       transparent 40%
     ),
-    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 40%),
     radial-gradient(at 50% 50%, rgba(15, 23, 42, 1) 0px, transparent 100%);
   background-attachment: fixed;
 }
@@ -53,7 +54,7 @@ body {
   width: 100%;
   max-width: 800px;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 /* Header Section */
@@ -217,7 +218,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 30px;
+  padding: 30px 15px;
 }
 
 .card {
@@ -305,7 +306,7 @@ main {
 }
 
 .card .content .text p:last-child {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 /* When task is completed */
 .card.completed {
@@ -400,9 +401,15 @@ main {
 
   header .tabs .tab {
     padding: 12px 10px;
-    font-size: 0.95rem;
+    font-size: 13px;
   }
-
+  header .tabs .tab .num-of-tasks,
+  header .tabs .tab .num-of-active-tasks,
+  header .tabs .tab .num-of-completed-tasks {
+    font-size: 12px;
+    padding: 2px 5px;
+    margin-left: 5px;
+  }
   .card {
     padding: 20px;
     border-radius: 20px;
